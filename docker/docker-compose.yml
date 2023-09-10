@@ -1,0 +1,20 @@
+services:
+  reservations:
+    env_file: ../.env
+    build:
+      context: ../
+      dockerfile: ./docker/reservations/Dockerfile
+      target: development
+    command: yarn start:dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ..:/usr/app
+  mongo:
+    env_file: ../.env
+    build:
+      context: ../
+      dockerfile: ./docker/mongo/Dockerfile
+      args:
+        root_username: ${mongo_db_user}
+        root_password: ${mongo_db_password}

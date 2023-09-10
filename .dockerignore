@@ -1,0 +1,9 @@
+docker
+dist
+http
+node_modules
+.dockerignore
+.gitignore
+.eslintrc.js
+.prettierrc.json
+README.md
