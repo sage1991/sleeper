@@ -1,11 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/sleeper/src",
+  "sourceRoot": "apps/reservations/src",
+  "root": "apps/reservations",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/sleeper/tsconfig.app.json"
+    "tsConfigPath": "apps/reservations/tsconfig.app.json"
   },
   "projects": {
     "common": {
@@ -15,15 +16,6 @@
       "sourceRoot": "libs/common/src",
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
-      }
-    },
-    "sleeper": {
-      "type": "application",
-      "root": "apps/sleeper",
-      "entryFile": "main",
-      "sourceRoot": "apps/sleeper/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/sleeper/tsconfig.app.json"
       }
     },
     "reservations": {
@@ -36,6 +28,5 @@
       }
     }
   },
-  "monorepo": true,
-  "root": "apps/sleeper"
+  "monorepo": true
 }
