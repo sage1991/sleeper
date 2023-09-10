@@ -8,7 +8,7 @@ export abstract class AbstractRepository<D extends AbstractDocument> {
 
   protected constructor(protected readonly model: Model<D>) {}
 
-  async create(payload: Omit<D, "_id">): Promise<D> {
+  async create(payload: Partial<D>) {
     const document = new this.model({
       ...payload,
       _id: new Types.ObjectId()
@@ -16,8 +16,12 @@ export abstract class AbstractRepository<D extends AbstractDocument> {
     return document.save()
   }
 
-  async findOne(filter: FilterQuery<D>): Promise<D> {
-    const document = await this.model.findOne(filter)
+  async remove(filter: FilterQuery<D>) {
+    return this.model.deleteMany(filter).exec()
+  }
+
+  async findOne(filter: FilterQuery<D>) {
+    const document = await this.model.findOne(filter).exec()
     if (!document) {
       this.logger.warn("Document not found with given query", filter)
       throw new NotFoundException("Document not found")
@@ -26,7 +30,7 @@ export abstract class AbstractRepository<D extends AbstractDocument> {
   }
 
   async findOneAndUpdate(filter: FilterQuery<D>, update: UpdateQuery<D>) {
-    const document = await this.model.findOneAndUpdate(filter, update, { new: true })
+    const document = await this.model.findOneAndUpdate(filter, update, { new: true }).exec()
     if (!document) {
       this.logger.warn("Document not found with given query", filter)
       throw new NotFoundException("Document not found")
@@ -35,11 +39,11 @@ export abstract class AbstractRepository<D extends AbstractDocument> {
   }
 
   async find(filter: FilterQuery<D>) {
-    return this.model.find(filter)
+    return this.model.find(filter).exec()
   }
 
   async findOneAndDelete(filter: FilterQuery<D>): Promise<D> {
-    const document = await this.model.findOneAndDelete(filter)
+    const document = await this.model.findOneAndDelete(filter).exec()
     if (!document) {
       this.logger.warn("Document not found with given query", filter)
       throw new NotFoundException("Document not found")

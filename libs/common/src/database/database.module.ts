@@ -13,10 +13,15 @@ import { ConfigModule } from "../config"
         return {
           uri: config.get("mongo_db_uri"),
           user: config.get("mongo_db_user"),
-          pass: config.get("mongo_db_password")
+          pass: config.get("mongo_db_password"),
+          dbName: config.get("mongo_db_name")
         }
       }
     })
   ]
 })
-export class DatabaseModule {}
+export class DatabaseModule {
+  static forFeature = (...params: Parameters<typeof MongooseModule.forFeature>) => {
+    return MongooseModule.forFeature(...params)
+  }
+}

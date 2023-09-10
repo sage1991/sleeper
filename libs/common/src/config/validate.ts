@@ -13,6 +13,10 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   mongo_db_password: string
+
+  @IsString()
+  @IsNotEmpty()
+  mongo_db_name: string
 }
 
 export const validate = (config: Record<string, unknown>) => {

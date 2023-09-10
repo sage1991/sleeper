@@ -1,0 +1,31 @@
+### Get all reservations
+GET http://localhost:3000/reservations
+
+### Create reservation
+POST http://localhost:3000/reservations
+Content-Type: application/json
+
+{
+  "startAt": "2023-09-01",
+  "endAt": "2023-09-30",
+  "place": "1",
+  "invoice": "20"
+}
+
+### Delete all reservations
+DELETE http://localhost:3000/reservations
+
+### Get reservation
+GET http://localhost:3000/reservations/64fd98468af87e4b6da8474d
+
+### Update reservation
+PATCH http://localhost:3000/reservations/64fd9ce410707f26c3c510d0
+Content-Type: application/json
+
+{
+  "startAt": "2023-09-01"
+}
+
+### Delete reservation
+DELETE http://localhost:3000/reservations/64fd98468af87e4b6da8474d
+Content-Type: application/json
