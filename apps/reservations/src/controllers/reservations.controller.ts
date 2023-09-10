@@ -14,7 +14,6 @@ export class ReservationsController {
 
   @Post()
   create(@Body() dto: CreateReservationDto) {
-    console.log(dto)
     return this.reservationsService.create(dto)
   }
 
@@ -35,7 +34,6 @@ export class ReservationsController {
 
   @Delete(":id")
   remove(@Param("id") id: string) {
-    console.log(id)
     return this.reservationsService.remove(id)
   }
 }
