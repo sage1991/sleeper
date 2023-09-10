@@ -1,22 +1,23 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ReservationsController } from './reservations.controller';
-import { ReservationsService } from './reservations.service';
+import { Test, TestingModule } from "@nestjs/testing"
 
-describe('ReservationsController', () => {
-  let reservationsController: ReservationsController;
+import { ReservationsController } from "./reservations.controller"
+import { ReservationsService } from "./reservations.service"
+
+describe("ReservationsController", () => {
+  let reservationsController: ReservationsController
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [ReservationsController],
-      providers: [ReservationsService],
-    }).compile();
+      providers: [ReservationsService]
+    }).compile()
 
-    reservationsController = app.get<ReservationsController>(ReservationsController);
-  });
+    reservationsController = app.get<ReservationsController>(ReservationsController)
+  })
 
-  describe('root', () => {
+  describe("root", () => {
     it('should return "Hello World!"', () => {
-      expect(reservationsController.getHello()).toBe('Hello World!');
-    });
-  });
-});
+      expect(reservationsController.getHello()).toBe("Hello World!")
+    })
+  })
+})

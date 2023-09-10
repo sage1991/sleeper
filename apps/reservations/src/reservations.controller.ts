@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { ReservationsService } from './reservations.service';
+import { Controller, Get } from "@nestjs/common"
+
+import { ReservationsService } from "./reservations.service"
 
 @Controller()
 export class ReservationsController {
@@ -7,6 +8,6 @@ export class ReservationsController {
 
   @Get()
   getHello(): string {
-    return this.reservationsService.getHello();
+    return this.reservationsService.getHello()
   }
 }
