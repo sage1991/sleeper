@@ -1,6 +1,11 @@
+version: '3.8'
+
 services:
   reservations:
-    env_file: ../.env
+    depends_on:
+      - mongo
+    env_file:
+      - ../apps/reservations/.env
     build:
       context: ../
       dockerfile: ./docker/reservations/Dockerfile
@@ -10,8 +15,23 @@ services:
       - 3000:3000
     volumes:
       - ..:/usr/app
+  auth:
+    depends_on:
+      - mongo
+    env_file:
+      - ../apps/auth/.env
+    build:
+      context: ../
+      dockerfile: ./docker/auth/Dockerfile
+      target: development
+    command: yarn start:dev auth
+    ports:
+      - 3001:3001
+    volumes:
+      - ..:/usr/app
   mongo:
-    env_file: ../.env
+    env_file:
+      - ../.env
     build:
       context: ../
       dockerfile: ./docker/mongo/Dockerfile

@@ -1,7 +1,12 @@
-import { plainToInstance } from "class-transformer"
-import { IsNotEmpty, IsString, validateSync } from "class-validator"
+import { plainToInstance, Type } from "class-transformer"
+import { IsNotEmpty, IsNumber, IsString, validateSync } from "class-validator"
 
 class EnvironmentVariables {
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  port: number
+
   @IsString()
   @IsNotEmpty()
   mongo_db_uri: string

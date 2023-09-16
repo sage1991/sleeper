@@ -1,0 +1,17 @@
+### signup
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+  "email": "harry.kane@kakaostyle.com",
+  "password": "HelloWorld123!"
+}
+
+### login
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+"email": "harry.kane@kakaostyle.com",
+"password": "HelloWorld123!"
+}
