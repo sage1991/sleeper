@@ -6,7 +6,7 @@ import { JwtModule } from "@nestjs/jwt"
 
 import { AuthModule } from "./auth"
 import { validate } from "./common/config"
-import { LocalStrategy } from "./common/strategies"
+import { JwtStrategy, LocalStrategy } from "./common/strategies"
 import { UsersModule } from "./users"
 
 @Module({
@@ -36,7 +36,8 @@ import { UsersModule } from "./users"
       provide: APP_PIPE,
       useValue: new ValidationPipe({ whitelist: true })
     },
-    LocalStrategy
+    LocalStrategy,
+    JwtStrategy
   ]
 })
 export class AppModule {}
