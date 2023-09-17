@@ -5,7 +5,7 @@ class EnvironmentVariables {
   @IsNumber()
   @IsNotEmpty()
   @Type(() => Number)
-  port: number
+  http_port: number
 
   @IsString()
   @IsNotEmpty()
@@ -22,6 +22,15 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   mongo_db_name: string
+
+  @IsString()
+  @IsNotEmpty()
+  auth_service_host: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  auth_service_port: number
 }
 
 export const validate = (config: Record<string, unknown>) => {

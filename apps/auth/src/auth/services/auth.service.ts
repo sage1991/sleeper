@@ -1,3 +1,4 @@
+import { UserDto } from "@app/common"
 import { Injectable } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { JwtService } from "@nestjs/jwt"
@@ -5,7 +6,6 @@ import dayjs from "dayjs"
 import { Response } from "express"
 
 import { TokenPayload } from "../../common/interfaces"
-import { User } from "../../users/schemas"
 
 @Injectable()
 export class AuthService {
@@ -14,9 +14,9 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  login(user: User, response: Response) {
+  login(user: UserDto, response: Response) {
     const payload: TokenPayload = {
-      id: user._id.toHexString()
+      id: user._id
     }
     const token = this.jwtService.sign(payload)
     response.cookie("Authentication", token, {

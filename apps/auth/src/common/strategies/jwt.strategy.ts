@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { Injectable } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { PassportStrategy } from "@nestjs/passport"
 import { Request } from "express"
@@ -16,16 +16,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       secretOrKey: config.get<string>("jwt_secret"),
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => request.cookies?.["Authentication"]
+        (request: Request) => request.cookies?.["Authentication"] ?? request?.["Authentication"]
       ])
     })
   }
 
-  async validate({ id: _id }: TokenPayload) {
-    try {
-      await this.usersService.findUser({ _id })
-    } catch (e) {
-      throw new UnauthorizedException(e)
-    }
+  validate({ id: _id }: TokenPayload) {
+    return this.usersService.findUser({ _id })
   }
 }

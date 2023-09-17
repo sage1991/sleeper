@@ -7,14 +7,16 @@ Content-Type: application/json
   "password": "HelloWorld123!"
 }
 
+
 ### get current user
 GET http://localhost:3001/users
+
 
 ### login
 POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-"email": "harry.kane@kakaostyle.com",
-"password": "HelloWorld123!"
+  "email": "harry.kane@kakaostyle.com",
+  "password": "HelloWorld123!"
 }

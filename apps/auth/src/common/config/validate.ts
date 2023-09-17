@@ -5,7 +5,12 @@ class EnvironmentVariables {
   @IsNumber()
   @IsNotEmpty()
   @Type(() => Number)
-  port: number
+  http_port: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  tcp_port: number
 
   @IsString()
   @IsNotEmpty()
@@ -27,9 +32,10 @@ class EnvironmentVariables {
   @IsNotEmpty()
   jwt_secret: string
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  jwt_expiration: string
+  @Type(() => Number)
+  jwt_expiration: number
 }
 
 export const validate = (config: Record<string, unknown>) => {

@@ -12,7 +12,7 @@ services:
       target: development
     command: yarn start:dev
     ports:
-      - 3000:3000
+      - ${reservations_service_port}:${reservations_service_port}
     volumes:
       - ..:/usr/app
   auth:
@@ -26,12 +26,10 @@ services:
       target: development
     command: yarn start:dev auth
     ports:
-      - 3001:3001
+      - ${auth_service_port}:${auth_service_port}
     volumes:
       - ..:/usr/app
   mongo:
-    env_file:
-      - ../.env
     build:
       context: ../
       dockerfile: ./docker/mongo/Dockerfile

@@ -1,3 +1,4 @@
+import { UserDto } from "@app/common"
 import { Injectable } from "@nestjs/common"
 
 import { CreateReservationDto, UpdateReservationDto } from "../dto"
@@ -7,8 +8,8 @@ import { ReservationsRepository } from "../repositories"
 export class ReservationsService {
   constructor(private readonly repository: ReservationsRepository) {}
 
-  create(dto: CreateReservationDto) {
-    return this.repository.create({ ...dto, user: "123" })
+  create({ _id }: UserDto, dto: CreateReservationDto) {
+    return this.repository.create({ ...dto, user: _id })
   }
 
   removeAll() {
