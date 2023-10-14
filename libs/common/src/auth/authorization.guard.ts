@@ -5,7 +5,7 @@ import { Request } from "express"
 import { map, tap } from "rxjs"
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class AuthorizationGuard implements CanActivate {
   constructor(@Inject(Services.auth) private readonly proxy: ClientProxy) {}
 
   canActivate(context: ExecutionContext) {
@@ -19,7 +19,7 @@ export class JwtAuthGuard implements CanActivate {
       tap((user) => {
         request.user = user
       }),
-      map(() => true)
+      map((user) => !!user)
     )
   }
 }
