@@ -9,7 +9,6 @@ import { compare, hash } from "bcryptjs"
 import { FindUserDto } from "../../auth/dto"
 import { CreateUserDto } from "../dto"
 import { UsersRepository } from "../repositories"
-import { User } from "../schemas"
 
 const SALT_ROUNDS = 10
 
