@@ -1,10 +1,10 @@
-import { AuthorizationGuard, DatabaseModule, Services } from "@app/common"
+import { AuthorizationGuard, DatabaseModule, Services, validate } from "@app/common"
 import { Module, ValidationPipe } from "@nestjs/common"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import { APP_GUARD, APP_PIPE } from "@nestjs/core"
 import { ClientsModule, Transport } from "@nestjs/microservices"
 
-import { validate } from "./config"
+import { EnvironmentVariables } from "./config"
 import { ReservationsController } from "./controllers"
 import { ReservationsRepository } from "./repositories"
 import { Reservation, ReservationSchema } from "./schemas"
@@ -14,7 +14,7 @@ import { ReservationsService } from "./services"
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validate
+      validate: validate(EnvironmentVariables)
     }),
     DatabaseModule,
     DatabaseModule.forFeature([{ name: Reservation.name, schema: ReservationSchema }]),

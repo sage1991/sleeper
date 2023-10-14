@@ -1,1 +1,1 @@
-export * from "./validate"
+export * from "./environment-variables.dto"

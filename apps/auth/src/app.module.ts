@@ -1,11 +1,11 @@
-import { DatabaseModule } from "@app/common"
+import { DatabaseModule, validate } from "@app/common"
 import { Module, ValidationPipe } from "@nestjs/common"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import { APP_PIPE } from "@nestjs/core"
 import { JwtModule } from "@nestjs/jwt"
 
 import { AuthModule } from "./auth"
-import { validate } from "./common/config"
+import { EnvironmentVariables } from "./common/config"
 import { JwtStrategy, LocalStrategy } from "./common/strategies"
 import { UsersModule } from "./users"
 
@@ -13,7 +13,7 @@ import { UsersModule } from "./users"
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validate
+      validate: validate(EnvironmentVariables)
     }),
     DatabaseModule,
     JwtModule.registerAsync({
