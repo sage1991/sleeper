@@ -8,7 +8,7 @@ services:
       - ../apps/reservations/.env
     build:
       context: ../
-      dockerfile: ./docker/reservations/Dockerfile
+      dockerfile: ./docker/reservations.Dockerfile
       target: development
     command: yarn start:dev
     ports:
@@ -22,7 +22,7 @@ services:
       - ../apps/auth/.env
     build:
       context: ../
-      dockerfile: ./docker/auth/Dockerfile
+      dockerfile: ./docker/auth.Dockerfile
       target: development
     command: yarn start:dev auth
     ports:
@@ -32,7 +32,9 @@ services:
   mongo:
     build:
       context: ../
-      dockerfile: ./docker/mongo/Dockerfile
+      dockerfile: ./docker/mongo.Dockerfile
       args:
         root_username: ${mongo_db_user}
         root_password: ${mongo_db_password}
+    ports:
+      - ${mongo_service_port}:${mongo_service_port}

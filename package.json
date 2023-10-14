@@ -19,10 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/sleeper/test/jest-e2e.json",
-    "build:mongo": "sh ./docker/mongo/build.sh",
-    "start:mongo": "sh ./docker/mongo/start.sh",
-    "build:reservation": "sh ./docker/reservations/build.sh",
-    "docker": "docker-compose --env-file ./docker/.env -f ./docker/docker-compose.yml up --build"
+    "docker:up": "docker-compose --env-file ./docker/.env -f ./docker/docker-compose.yml up --build",
+    "docker:config": "docker-compose --env-file ./docker/.env -f ./docker/docker-compose.yml config"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
