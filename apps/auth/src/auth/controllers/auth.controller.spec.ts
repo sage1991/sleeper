@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing"
 
+import { AuthService } from "../services"
 import { AuthController } from "./auth.controller"
-import { AuthService } from "./auth.service"
 
 describe("AuthController", () => {
-  let authController: AuthController
+  let controller: AuthController
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -12,12 +12,10 @@ describe("AuthController", () => {
       providers: [AuthService]
     }).compile()
 
-    authController = app.get<AuthController>(AuthController)
+    controller = app.get<AuthController>(AuthController)
   })
 
-  describe("root", () => {
-    it('should return "Hello World!"', () => {
-      expect(authController.getHello()).toBe("Hello World!")
-    })
+  it("should be defined", () => {
+    expect(controller).toBeDefined()
   })
 })

@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing"
 
+import { PaymentsService } from "../services"
 import { PaymentsController } from "./payments.controller"
-import { PaymentsService } from "./payments.service"
 
 describe("PaymentsController", () => {
-  let paymentsController: PaymentsController
+  let controller: PaymentsController
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -12,12 +12,10 @@ describe("PaymentsController", () => {
       providers: [PaymentsService]
     }).compile()
 
-    paymentsController = app.get<PaymentsController>(PaymentsController)
+    controller = app.get<PaymentsController>(PaymentsController)
   })
 
-  describe("root", () => {
-    it('should return "Hello World!"', () => {
-      expect(paymentsController.getHello()).toBe("Hello World!")
-    })
+  it("should be defined", () => {
+    expect(controller).toBeDefined()
   })
 })
