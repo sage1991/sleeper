@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  payments:
+    depends_on:
+      - mongo
+    env_file:
+      - ../apps/payments/.env
+    build:
+      context: ../
+      dockerfile: ./docker/payments.Dockerfile
+      target: development
+    command: yarn start:dev payments
+    ports:
+      - ${payments_service_port}:${payments_service_port}
+    volumes:
+      - ..:/usr/app
   reservations:
     depends_on:
       - mongo
