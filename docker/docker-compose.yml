@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  notifications:
+    depends_on:
+      - mongo
+    env_file:
+      - ../apps/notifications/.env
+    build:
+      context: ../
+      dockerfile: ./docker/notifications.Dockerfile
+      target: development
+    command: yarn start:dev notifications
+    ports:
+      - ${notifications_service_port}:${notifications_service_port}
+    volumes:
+      - ..:/usr/app
   payments:
     depends_on:
       - mongo
