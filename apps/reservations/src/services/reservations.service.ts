@@ -2,6 +2,7 @@ import { Services, UserDto } from "@app/common"
 import { Inject, Injectable } from "@nestjs/common"
 import { ClientProxy } from "@nestjs/microservices"
 import { map } from "rxjs"
+import Stripe from "stripe"
 
 import { CreateReservationDto, UpdateReservationDto } from "../dto"
 import { ReservationsRepository } from "../repositories"
@@ -14,9 +15,9 @@ export class ReservationsService {
   ) {}
 
   async create({ _id }: UserDto, dto: CreateReservationDto) {
-    return this.payments.send("create-charge", {}).pipe(
-      map(() => {
-        return this.repository.create({ ...dto, user: _id })
+    return this.payments.send<Stripe.PaymentIntent>("create-charge", dto.charge).pipe(
+      map(({ id }) => {
+        return this.repository.create({ ...dto, invoice: id, user: _id })
       })
     )
   }
