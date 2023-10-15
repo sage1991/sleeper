@@ -9,8 +9,15 @@ Content-Type: application/json
 {
   "startAt": "2023-09-01",
   "endAt": "2023-09-30",
-  "place": "1",
-  "invoice": "20"
+  "charge": {
+    "amount": 200,
+    "card": {
+      "cvc": "123",
+      "year": 2027,
+      "month": 12,
+      "number": "4242 4242 4242 4242"
+    }
+  }
 }
 
 
