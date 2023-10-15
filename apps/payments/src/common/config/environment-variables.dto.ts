@@ -14,22 +14,6 @@ export class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
-  mongo_db_uri: string
-
-  @IsString()
-  @IsNotEmpty()
-  mongo_db_user: string
-
-  @IsString()
-  @IsNotEmpty()
-  mongo_db_password: string
-
-  @IsString()
-  @IsNotEmpty()
-  mongo_db_name: string
-
-  @IsString()
-  @IsNotEmpty()
   auth_service_host: string
 
   @IsNumber()
