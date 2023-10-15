@@ -25,6 +25,17 @@ import { PaymentsService } from "./services"
             port: config.get<number>("auth_service_port")
           }
         })
+      },
+      {
+        name: Services.notifications,
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: config.get<string>("notifications_service_host"),
+            port: config.get<number>("notifications_service_port")
+          }
+        })
       }
     ])
   ],

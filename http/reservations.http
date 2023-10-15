@@ -10,7 +10,7 @@ Content-Type: application/json
   "startAt": "2023-09-01",
   "endAt": "2023-09-30",
   "charge": {
-    "amount": 200,
+    "amount": 100,
     "card": {
       "cvc": "123",
       "year": 2027,

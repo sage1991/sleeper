@@ -14,8 +14,8 @@ export class ReservationsService {
     @Inject(Services.payments) private readonly payments: ClientProxy
   ) {}
 
-  async create({ _id }: UserDto, dto: CreateReservationDto) {
-    return this.payments.send<Stripe.PaymentIntent>("create-charge", dto.charge).pipe(
+  async create({ _id, email }: UserDto, dto: CreateReservationDto) {
+    return this.payments.send<Stripe.PaymentIntent>("create-charge", { ...dto.charge, email }).pipe(
       map(({ id }) => {
         return this.repository.create({ ...dto, invoice: id, user: _id })
       })

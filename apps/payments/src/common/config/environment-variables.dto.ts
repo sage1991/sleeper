@@ -23,5 +23,14 @@ export class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
+  notifications_service_host: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  notifications_service_port: string
+
+  @IsString()
+  @IsNotEmpty()
   stripe_api_key: string
 }
