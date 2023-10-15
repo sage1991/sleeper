@@ -13,9 +13,6 @@ export class Reservation extends AbstractDocument {
   user: string
 
   @Prop()
-  place: string
-
-  @Prop()
   invoice: string
 
   @Prop({ default: Date })
