@@ -1,15 +1,24 @@
-import { UserDto } from "@app/common"
-import { Injectable } from "@nestjs/common"
+import { Services, UserDto } from "@app/common"
+import { Inject, Injectable } from "@nestjs/common"
+import { ClientProxy } from "@nestjs/microservices"
+import { map } from "rxjs"
 
 import { CreateReservationDto, UpdateReservationDto } from "../dto"
 import { ReservationsRepository } from "../repositories"
 
 @Injectable()
 export class ReservationsService {
-  constructor(private readonly repository: ReservationsRepository) {}
+  constructor(
+    private readonly repository: ReservationsRepository,
+    @Inject(Services.payments) private readonly payments: ClientProxy
+  ) {}
 
-  create({ _id }: UserDto, dto: CreateReservationDto) {
-    return this.repository.create({ ...dto, user: _id })
+  async create({ _id }: UserDto, dto: CreateReservationDto) {
+    return this.payments.send("create-charge", {}).pipe(
+      map(() => {
+        return this.repository.create({ ...dto, user: _id })
+      })
+    )
   }
 
   removeAll() {

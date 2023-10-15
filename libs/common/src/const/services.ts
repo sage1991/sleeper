@@ -1,3 +1,4 @@
 export const enum Services {
-  auth = "auth"
+  auth = "auth",
+  payments = "payments"
 }

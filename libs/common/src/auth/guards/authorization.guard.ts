@@ -4,7 +4,7 @@ import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/commo
 import { Reflector } from "@nestjs/core"
 import { ClientProxy } from "@nestjs/microservices"
 import { Request } from "express"
-import { map, tap } from "rxjs"
+import { catchError, map, of, tap } from "rxjs"
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
@@ -14,7 +14,7 @@ export class AuthorizationGuard implements CanActivate {
   ) {}
 
   canActivate(context: ExecutionContext) {
-    const isPublic = this.reflector.getAllAndOverride(Public, [
+    const isPublic = this.reflector.getAllAndOverride(Public.key, [
       context.getHandler(),
       context.getClass()
     ])
@@ -31,7 +31,8 @@ export class AuthorizationGuard implements CanActivate {
       tap((user) => {
         request.user = user
       }),
-      map((user) => !!user)
+      map((user) => !!user),
+      catchError(() => of(false))
     )
   }
 }

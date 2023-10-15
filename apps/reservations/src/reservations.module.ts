@@ -29,6 +29,17 @@ import { ReservationsService } from "./services"
             port: config.get<number>("auth_service_port")
           }
         })
+      },
+      {
+        name: Services.payments,
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: config.get<string>("payments_service_host"),
+            port: config.get<number>("payments_service_port")
+          }
+        })
       }
     ])
   ],

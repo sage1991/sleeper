@@ -31,4 +31,13 @@ export class EnvironmentVariables {
   @IsNotEmpty()
   @Type(() => Number)
   auth_service_port: number
+
+  @IsString()
+  @IsNotEmpty()
+  payments_service_host: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  payments_service_port: number
 }
