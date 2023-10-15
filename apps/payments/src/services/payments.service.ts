@@ -31,7 +31,13 @@ export class PaymentsService {
       confirm: true,
       payment_method_types: ["card"]
     })
-    this.notifications.emit("notify-email", { email })
+
+    this.notifications.emit("notify-email", {
+      email,
+      subject: "Sleeper payments notification",
+      text: `Your payment of $${amount} has completed successfully.`
+    })
+
     return intents
   }
 }
